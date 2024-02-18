@@ -12,7 +12,7 @@ using SolarLabTask.DataBase;
 namespace SolarLabTask.Migrations
 {
     [DbContext(typeof(WebAppContext))]
-    [Migration("20240217111151_Initial")]
+    [Migration("20240218090210_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

@@ -14,13 +14,7 @@ namespace SolarLabTask.DataBase
         public virtual DbSet<SocialsList> SocialsList { get; set; }
         public virtual DbSet<User> User { get; set; }
 
-        //private string _connection = string.Empty;
-        // TODO Заменить подключение к БД на другое (через файл конфигурации) 
-        public WebAppContext() { }
+        public WebAppContext(DbContextOptions<WebAppContext> options) : base (options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql();
-        }
     }
 }

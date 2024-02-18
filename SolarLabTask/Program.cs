@@ -1,7 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using SolarLabTask.DataBase;
+using SolarLabTask.Interfaces.Repos;
+using SolarLabTask.Interfaces.Services;
+using SolarLabTask.Repositories;
+using SolarLabTask.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register DbContext
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<WebAppContext>(options => options.UseNpgsql(connectionString));
+
+builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<IPersonListRepo, PersonListRepo>();
+builder.Services.AddTransient<IPersonListService, PersonListService>();
 
 var app = builder.Build();
 
@@ -22,6 +37,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Web}/{action=Index}/{id?}");
 
 app.Run();

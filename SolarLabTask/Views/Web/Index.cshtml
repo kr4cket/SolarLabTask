@@ -1,0 +1,35 @@
+﻿@model SolarLabTask.Models.PersonList;
+@{
+    ViewData["Title"] = "Home Page";
+    List<PersonList> list = (List<PersonList>)ViewData["List"]!;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Ближайшие дни рождения</h1>
+</div>
+
+<table class="table table-hover text-center">
+    @foreach (var element in list)
+    {
+        
+        <tr>
+            <td>
+                    @element.Person.Name
+            </td>
+            <td>
+                    @element.Person.Surname
+            </td>
+            <td>
+                    @element.Person.DateOfBirth
+            </td>
+            <td>
+                    @element.PersonCategory.Name
+            </td>            
+            <td>
+                    <a href="/">
+                        Посмотреть информацию
+                    </a>
+            </td>
+        </tr>
+    }
+</table>
