@@ -1,0 +1,31 @@
+﻿@model SolarLabTask.Models.Person;
+@{
+    ViewData["Title"] = "SolarLabTask";
+    Person person = (Person)ViewData["Person"]!;
+    SelectList list = (SelectList)ViewData["List"]!;
+}
+
+<div class="text-center page-section">
+    <h1 class="display-4">@person.Name @person.Surname</h1>
+</div>
+
+<div class ="page-section">
+    <div class="person-info">
+        <div class="person-info__picture-block">
+            <img src="~/imgs/@person.Image.Path" />
+            <form method="post" class="person-info__delete" asp-controller="Person" asp-action="Delete" asp-route-id="@person.Id">
+                <input type="submit" value="Удалить запись" class="btn btn-danger" />
+            </form>
+        </div>
+        <form method="post" class="person-info__form" asp-controller="Person" asp-action="Update" asp-route-id="@person.Id" enctype="multipart/form-data">
+            <input type="text" value="@person.Name" asp-for=Name />
+            <input type="text" value="@person.Surname" asp-for=Surname />
+            <input type="date" value="@person.DateOfBirth.ToString("yyyy-MM-dd")" asp-for=DateOfBirth />
+            <select asp-items="list" asp-for="CategoryId"> </select>
+            <input type="file" value="Загрузить фотографию" name="file" class="form-control" accept="image/*" value="@person.Image.Path" />
+            <input type="submit" value="Применить изменения" class="btn btn-primary" />
+        </form>
+
+    </div>
+</div>
+

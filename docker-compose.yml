@@ -1,12 +1,6 @@
 version: '3.4'
 
 services:
-  solarlabtask:
-    image: ${DOCKER_REGISTRY-}solarlabtask
-    build:
-      context: .
-      dockerfile: SolarLabTask/Dockerfile
-
   postgres:
     image: postgres:14.8-alpine3.18
     environment:
@@ -27,3 +21,9 @@ services:
           limits:
             cpus: '1'
             memory: 4G
+
+  solarlabtask:
+    image: ${DOCKER_REGISTRY-}solarlabtask
+    build:
+      context: .
+      dockerfile: SolarLabTask/Dockerfile

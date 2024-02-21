@@ -1,0 +1,30 @@
+﻿@model SolarLabTask.Models.Person;
+@{
+    ViewData["Title"] = "SolarLabTask";
+    SelectList list = (SelectList)ViewData["List"]!;
+}
+
+<div class="text-center page-section">
+    <h1 class="display-4">Добавление пользователя</h1>
+</div>
+
+<form class="row g-3" method="post" class="form" asp-controller="Person" asp-action="Add" enctype="multipart/form-data">
+    <div class="col-md-6">
+        <input type="text" class=" form-control" placeholder="Имя" asp-for=Name />
+    </div>
+    <div class="col-md-6">
+        <input type="text" class=" form-control" placeholder="Фамилия" asp-for=Surname />
+    </div>
+    <div class="col-md-6">
+        <input type="date" class=" form-control" placeholder="Дата рождения" asp-for=DateOfBirth />
+    </div>   
+    <div class="col-md-6">
+        <select asp-items="list" class="form-select" asp-for="CategoryId"> </select>
+    </div>
+    <div class="col-12">
+        <input type="file" class="form-control" value="Загрузить фотографию" name="file" accept="image/*" />
+    </div>
+    <div class="col-12">
+        <input type="submit" class=" btn btn-primary" value="Добавить" />
+    </div>
+</form>

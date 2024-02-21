@@ -4,9 +4,10 @@ namespace SolarLabTask.Interfaces.Repos
 {
     public interface IAppRepo<out O, in T>
     {
+        O Get(int id);
         O Add(T value);
-        O Update(T value);
-        O Delete(int id);
+        void Update(T value);
+        void Delete(T value);
         IEnumerable<O> GetAll();
     }
 }

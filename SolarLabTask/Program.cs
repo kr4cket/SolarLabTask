@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SolarLabTask.DataBase;
+using SolarLabTask.Helper;
 using SolarLabTask.Interfaces.Repos;
 using SolarLabTask.Interfaces.Services;
 using SolarLabTask.Repositories;
@@ -13,30 +14,37 @@ builder.Services.AddControllersWithViews();
 // Register DbContext
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<WebAppContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 builder.Services.AddScoped<IUserRepo, UserRepo>();
-builder.Services.AddScoped<IPersonListRepo, PersonListRepo>();
+builder.Services.AddScoped<IPersonRepo, PersonRepo>();
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+builder.Services.AddScoped<IPersonImageRepo, PersonImageRepo>();
 builder.Services.AddTransient<IPersonListService, PersonListService>();
+builder.Services.AddTransient<IPersonService, PersonService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    var generator = new MockGenerator();
+    Console.WriteLine("Создание тестовых записей..");
+    generator.MakeRecords();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Web}/{action=Index}/{id?}");
+    pattern: "{controller=PersonList}/{action=Index}/{id?}");
 
 app.Run();

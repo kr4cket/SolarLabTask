@@ -1,0 +1,40 @@
+﻿@model SolarLabTask.Models.Person;
+@{
+    ViewData["Title"] = "Home Page";
+    List<Person> list = (List<Person>)ViewData["List"]!;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Весь список</h1>
+</div>
+
+
+<div class="person-list">
+    @foreach (var element in list)
+    {
+        <div class="person">
+            <img src="~/imgs/@element.Image.Path" />
+            <div class="person__text">
+                <div class="person__name">
+                    <div>
+                        @element.Name
+                    </div>
+                    <div>
+                        @element.Surname
+                    </div>
+                </div>
+                <div>
+                    @element.DateOfBirth
+                </div>
+                <div>
+                    @element.PersonCategory.Name
+                </div>
+                <div>
+                    <a asp-route-id="@element.Id" asp-controller="Person" asp-action="Index" class="btn btn-primary">
+                        Посмотреть информацию
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -4,6 +4,6 @@ namespace SolarLabTask.Interfaces.Repos
 {
     public interface IPersonRepo : IAppRepo<Person, Person>
     {
-
+        public IEnumerable<Person> GetListByUserId(int Id);
     }
 }

@@ -15,12 +15,29 @@ namespace SolarLabTask.Services
 
         public User Add(User value)
         {
+            _context.User.Add(value);
+            _context.SaveChanges();
+            return value;
+        }
+
+        public void Delete(int id)
+        {
             throw new NotImplementedException();
         }
 
-        public User Delete(int id)
+        public void Delete(User value)
         {
             throw new NotImplementedException();
+        }
+
+        public User Get(int id)
+        {
+            return _context.User.Where(u => u.Id == id).FirstOrDefault()!;
+        }
+
+        public User GetByLogin(User User)
+        {
+            return _context.User.Where(u => u.Login == User.Login).FirstOrDefault()!;
         }
 
         public IEnumerable<User> GetAll()
@@ -28,9 +45,19 @@ namespace SolarLabTask.Services
             throw new NotImplementedException();
         }
 
-        public User Update(User value)
+        public bool IsUserExist(User User)
+        {
+            return !_context.User.Any(user => user.Login == User.Login && user.Password == User.Password);
+        }
+
+        public void Update(User value)
         {
             throw new NotImplementedException();
+        }
+
+        public bool IsUserLoginExist(User User)
+        {
+            return !_context.User.Any(user => user.Login == User.Login);
         }
     }
 }

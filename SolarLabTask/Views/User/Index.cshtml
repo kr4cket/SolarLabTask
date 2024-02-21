@@ -1,0 +1,27 @@
+﻿@model SolarLabTask.Models.User;
+
+<div class="text-center page-section">
+    <h1 class="display-4">Авторизация</h1>
+</div>
+
+<div class="auth-form">
+    <form class="row g-3 auth-form__content" method="post" asp-controller="User" asp-action="Index">
+        <div class="col-md-12">
+            <input type="text" class=" form-control" placeholder="Логин" asp-for=Login />
+        </div>
+        <div class="col-md-12">
+            <input type="password" class=" form-control" placeholder="Пароль" asp-for=Password />
+        </div>
+        <div class="col-12">
+            <a asp-controller="User" asp-action="Registration" class="btn btn-link">
+                Регистрация
+            </a>
+        </div>
+        <div class="col-6">
+            <input type="submit" class=" btn btn-primary" value="Войти" />
+        </div>
+        <div class="col-6">
+            @ViewBag.ErrorMsg
+        </div>
+    </form>
+</div>
