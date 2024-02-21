@@ -24,11 +24,10 @@ namespace SolarLabTask.Helper
         }
         public void MakeRecords()
         {
-            return;
-            //if (_context.User.Any())
-            //{
-            //    return;
-            //}
+            if (_context.User.Count() > 0)
+            {
+                return;
+            }
 
             var ImageObj = new PersonImage()
             {
