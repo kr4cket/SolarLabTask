@@ -37,6 +37,15 @@ namespace SolarLabTask.Controllers
             }
         }
 
+        public IActionResult Logout()
+        {
+            if (!HttpContext.Session.Keys.Contains("id"))
+                return RedirectToAction("Index", "User");
+
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "User");
+        }
+
         [HttpGet]
         public IActionResult Registration()
         {

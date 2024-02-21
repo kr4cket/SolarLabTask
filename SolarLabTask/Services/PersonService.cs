@@ -59,6 +59,10 @@ namespace SolarLabTask.Services
                     _deletePrevFile(person.Image.Path);
 
                 _uploadFile(File, file);
+            } else
+            {
+                person.Image = _personRepo.GetImageById(person.Id);
+                person.ImageId = person.Image.Id;
             }
 
             person.UserId = UserId;

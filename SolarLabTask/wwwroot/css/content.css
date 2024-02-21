@@ -45,8 +45,7 @@
     border-radius: 20px;
     font-size: 24px;
     align-items: center;
-    width: fit-content;
-    align-items: center;
+    justify-content: center;
 
     img {
         width: 200px;

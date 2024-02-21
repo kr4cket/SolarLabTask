@@ -36,6 +36,14 @@ namespace SolarLabTask.Repositories
             throw new NotImplementedException();
         }
 
+        public PersonImage GetImageById(int Id)
+        {
+            return _context.PersonImage.
+                Where(p => p.Id == _context.Person.
+                Where(p => p.Id == Id).FirstOrDefault().ImageId).
+                FirstOrDefault();
+        }
+
         public IEnumerable<Person> GetListByUserId(int Id)
         {
             return _context.Person.Where(list => list.UserId == Id).Include(list => list.PersonCategory).Include(img => img.Image).ToList();
